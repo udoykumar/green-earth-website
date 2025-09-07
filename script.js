@@ -28,14 +28,15 @@ const categoriesData = () => {
  * dispaly categories
  */
 const displayCategories = (categories) => {
-  // categoriesContainer.innerHTM = "";
   categories.forEach((categorie) => {
-    // console.log(categorie);
     categoriesContainer.innerHTML += `
         <li id="${categorie.id}" class="text-lg hover:bg-[#15803D] hover:text-white p-3 rounded-md cat-btn">${categorie.category_name}</li>
         `;
   });
 };
+/**
+ * display categories actice class added
+ */
 const displayCategoriesData = (id) => {
   const url = `https://openapi.programming-hero.com/api/category/${id}`;
   fetch(url)
@@ -44,7 +45,6 @@ const displayCategoriesData = (id) => {
 };
 
 categoriesContainer.addEventListener("click", (e) => {
-  // console.log(e.target.localName === "li");
   const allli = document.querySelectorAll("li");
   allli.forEach((li) => {
     li.classList.remove("active");
@@ -54,15 +54,12 @@ categoriesContainer.addEventListener("click", (e) => {
     displayCategoriesData(e.target.id);
   }
 });
-
 /**
  * dispaly main tree
  */
 const displayTreeContainer = (trees) => {
-  //   console.log(trees);
   treeContainer.innerHTML = "";
   trees.forEach((tree) => {
-    // console.log(tree);
     treeContainer.innerHTML += `
     <div class="card bg-base-100  shadow-sm p-4">
       <figure>
@@ -72,7 +69,9 @@ const displayTreeContainer = (trees) => {
       alt="Shoes" />
       </figure>
       <div class=" mt-3">
-        <h2 class="font-bold text-xl">${tree.name}</h2>
+        <h2 onclick="my_modal_5.showModal() class="font-bold text-xl">${
+          tree.name
+        }</h2>
         <p>${tree.description.slice(0, 100)}...</p>
         <div class="flex justify-between items-center my-3">
           <h2 class="bg-[#CFF0DC] text-[#15803D] px-3 py-2 rounded-full">${
@@ -90,7 +89,10 @@ const displayTreeContainer = (trees) => {
 `;
   });
 };
-const addToCard = [];
+/**
+ * add to card
+ */
+let addToCard = [];
 treeContainer.addEventListener("click", (e) => {
   if (e.target.tagName === "BUTTON") {
     const title = e.target.parentNode.parentNode.children[0].innerText;
@@ -98,8 +100,6 @@ treeContainer.addEventListener("click", (e) => {
       e.target.parentNode.parentNode.children[2].children[1].children[0]
         .innerText;
     const id = e.target.id;
-
-    // console.log(id);
     const checkQuantity = addToCard.find((item) => item.id == id);
     if (checkQuantity) {
       checkQuantity.quantity++;
@@ -112,15 +112,17 @@ treeContainer.addEventListener("click", (e) => {
       });
     }
     displayCard(addToCard);
+    alert(`${title} Added`);
   }
-  alert("add to card click");
 });
+/**
+ * display side card
+ */
 const displayCard = (card) => {
   cardContainer.innerHTML = "";
   const totalPrice = document.getElementById("totalPrice");
   let priceCount = 0;
   card.forEach((item) => {
-    // console.log(item);
     cardContainer.innerHTML += `
             <div class="p-3 bg-[#CFF0DC] rounded-lg text-xl mb-3 flex justify-between items-center"> 
               <div class="space-y-3">
@@ -133,13 +135,20 @@ const displayCard = (card) => {
             </div>
             `;
     priceCount += Number(item.price * item.quantity);
-    totalPrice.innerText = priceCount;
   });
+  totalPrice.innerText = priceCount;
 };
+/**
+ * card delete
+ */
 const cardItemDelete = (cardId) => {
-  const cartFilter = addToCard.filter((card) => card.id !== cardId);
-  addToCard = cartFilter;
-  console.log(cartFilter);
+  console.log(cardId);
+  addToCard.map((item, index) => {
+    if (item.id == cardId) {
+      addToCard.splice(index, 1);
+      displayCard(addToCard);
+    }
+  });
 };
 
 categoriesData();
