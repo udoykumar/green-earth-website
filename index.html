@@ -65,39 +65,42 @@
 
     <!-- hero section  -->
     <section>
-        <div class="bg-[#CFF0DC]">
-            <div class="flex justify-between items-center">
-                <img width="400" src="./assets/hero-leaf1.png" alt="">
+        <div class="bg-[#CFF0DC] py-4">
+            <div class="flex justify-between items-center w-11/12 mx-auto px-3">
+                <img class="hidden md:block md:w-[300px] lg:block lg:w-[400px]" src="./assets/hero-leaf1.png" alt="">
                 <div class=" text-center">
-                    <h1 class="text-3xl font-bold text-[#1F2937]">Plant a Tree, Grow a Future</h1>
+                    <h1 class="text-xl mt-3 md:text-3xl font-bold text-[#1F2937]">Plant a Tree, Grow a Future</h1>
                     <p class="text-[#1F2937] mt-2 mb-5 ">Join our mission to plant 1 million trees and make
                         the Earth
                         greener for future
                         generations.</p>
                     <button class="btn bg-[#FACC15] text-[#15803D] rounded-full">Get Involved</button>
                 </div>
-                <img width=" 400" src="./assets/hero-leaf2.png" alt="">
+                <img class="hidden md:block md:w-[300px] lg:block lg:w-[400px]" src="./assets/hero-leaf2.png" alt="">
             </div>
         </div>
     </section>
     <!-- main section  -->
     <main class="w-11/12 mx-auto px-3 my-9">
-        <h1 class="text-2xl text-center ">Choose Your Trees</h1>
-        <section class="grid grid-cols-5 gap-3">
+        <section id="spniner" class="flex justify-center py-2 hidden">
+            <span class="loading loading-dots loading-xl"></span>
+        </section>
+        <h1 class="text-2xl text-center font-bold">Choose Your Trees</h1>
+        <section class="grid grid-cols-1 lg:grid-cols-5 gap-3">
             <!-- cetegories section  -->
             <section class="col-span-1">
-                <h1 class="text-3xl font-bold mb-4">Categories</h1>
+                <h1 class="text-3xl font-bold mb-4 text-center mt-5 md:text-left md:mt-0">Categories</h1>
 
-                <ul id="categorie-container" class="space-y-3 pr-4">
+                <ul id="categorie-container" class="space-y-3 flex flex-wrap justify-between">
 
                 </ul>
             </section>
             <!-- trees section  -->
-            <section id="trees-container" class="col-span-3 grid grid-cols-3">
+            <section id="trees-container" class=" lg:col-span-3 grid lg:grid-cols-3 ">
 
             </section>
             <!-- your cart section  -->
-            <section class="col-span-1">
+            <section class="lg:col-span-1">
                 <h1 class="text-2xl font-bold py-4">Your Cart</h1>
                 <div class="space-y-4">
                     <div id="cardContainer" class="">
@@ -112,10 +115,10 @@
 
     </main>
     <!-- about section start  -->
-    <section class="my-20 w-3/4 mx-auto">
-        <h1 class="text-center text-4xl font-bold">About the Campaign</h1>
-        <div class="flex justify-between items-center">
-            <div class="flex-1">
+    <section class="my-20 w-11/12 mx-auto">
+        <h1 class="text-center text-4xl font-bold mb-3">About the Campaign</h1>
+        <div class="flex flex-col items-center">
+            <div class="flex-1 mb-4 md:mb-0">
                 <img src="./assets/about.png" alt="">
             </div>
             <div class="flex-1 space-y-3">
@@ -123,7 +126,7 @@
                     climate change. Since
                     our start, we’ve planted over 500,000 trees worldwide. By joining our campaign, you help restore
                     forests, create habitats for wildlife, and combat global warming.</p>
-                <ul class="list-disc">
+                <ul class="list-disc pl-3 md:pl-0">
                     <li>Restoration of natural habitats</li>
                     <li>Improvement of air quality</li>
                     <li>Support for local communities</li>
@@ -137,16 +140,16 @@
         <div class="flex justify-center py-20">
             <div>
                 <h1 class="text-center text-4xl font-bold pb-10">Our Impact</h1>
-                <div class="flex justify-between gap-8">
-                    <div class="bg-white p-7 rounded-lg flex-1 w-96 text-center">
+                <div class="md:flex md:justify-between md:gap-8 space-y-4">
+                    <div class="bg-white p-7 rounded-lg flex-1 md:w-96 text-center">
                         <h1 class="text-[#15803D] font-bold text-4xl mb-3">500+</h1>
                         <p>Trees Planted</p>
                     </div>
-                    <div class="bg-white p-7 rounded-lg flex-1 w-96 text-center">
+                    <div class="bg-white p-7 rounded-lg flex-1 md:w-96 text-center">
                         <h1 class="text-[#15803D] font-bold text-4xl mb-3">120+</h1>
                         <p>Communities Involved</p>
                     </div>
-                    <div class="bg-white p-7 rounded-lg flex-1 w-96 text-center">
+                    <div class="bg-white p-7 rounded-lg flex-1 md:w-96 text-center">
                         <h1 class="text-[#15803D] font-bold text-4xl mb-3">30+</h1>
                         <p>Countries Reached</p>
                     </div>
@@ -166,22 +169,23 @@
                     <input class="p-4 w-full my-4 bg-white rounded-lg text-lg " type="email" placeholder="Your Email">
                     <input class="p-4 w-full bg-white rounded-lg text-lg " type="number" placeholder="Number of Trees">
                     <button
-                        class="py-4 bg-[#FACC15] text-[#15803D] rounded-full w-full text-2xl mt-8 cursor-pointer">Donate
+                        class="py-3 bg-[#FACC15] text-[#15803D] rounded-full w-full text-lg  md:text-xl mt-8 cursor-pointer">Donate
                         Now</button>
                 </form>
             </div>
         </div>
     </section>
+
     <!-- modal section  -->
-    <!-- Open the modal using ID.showModal() method -->
-    <!-- <button class="btn" onclick="my_modal_5.showModal()">open modal</button> -->
-    <dialog id="my_modal_5" class="modal modal-bottom sm:modal-middle">
+
+    <dialog id="plants-modal" class="modal modal-bottom sm:modal-middle">
         <div class="modal-box">
-            <h3 class="text-lg font-bold">Hello!</h3>
-            <p class="py-4">Press ESC key or click the button below to close</p>
+            <div id="plantsDetails">
+
+            </div>
             <div class="modal-action">
                 <form method="dialog">
-                    <!-- if there is a button in form, it will close the modal -->
+
                     <button class="btn">Close</button>
                 </form>
             </div>
@@ -190,7 +194,7 @@
 
     <!-- footer section  -->
     <footer class="bg-[#14532D] text-white py-4 text-center">
-        <h1 class="text-2xl">© 2025 Green Earth. All Rights Reserved.</h1>
+        <h1 class="text-lg md:text-2xl">© 2025 Green Earth. All Rights Reserved.</h1>
     </footer>
 
     <!-- javascript link  -->

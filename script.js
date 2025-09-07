@@ -2,10 +2,17 @@ const treeContainer = document.getElementById("trees-container");
 const categoriesContainer = document.getElementById("categorie-container");
 let cardContainer = document.getElementById("cardContainer");
 
+// loading function
+const manageLoading = (status) => {
+  if (status) {
+    document.getElementById("spniner").classList.remove("hidden");
+  } else {
+    document.getElementById("spniner").classList.add("hidden");
+  }
+};
 /**
  * main tree data load
  */
-
 const loadTreeData = () => {
   const url = "https://openapi.programming-hero.com/api/plants";
   fetch(url)
@@ -30,20 +37,14 @@ const categoriesData = () => {
 const displayCategories = (categories) => {
   categories.forEach((categorie) => {
     categoriesContainer.innerHTML += `
-        <li id="${categorie.id}" class="text-lg hover:bg-[#15803D] hover:text-white p-3 rounded-md cat-btn">${categorie.category_name}</li>
-        `;
+    <li id="${categorie.id}" class="text-lg hover:bg-[#15803D] hover:text-white p-3 rounded-md cat-btn">${categorie.category_name}</li>
+    `;
   });
 };
+
 /**
  * display categories actice class added
  */
-const displayCategoriesData = (id) => {
-  const url = `https://openapi.programming-hero.com/api/category/${id}`;
-  fetch(url)
-    .then((res) => res.json())
-    .then((trees) => displayTreeContainer(trees.plants));
-};
-
 categoriesContainer.addEventListener("click", (e) => {
   const allli = document.querySelectorAll("li");
   allli.forEach((li) => {
@@ -52,26 +53,55 @@ categoriesContainer.addEventListener("click", (e) => {
   if (e.target.localName === "li") {
     e.target.classList.add("active");
     displayCategoriesData(e.target.id);
+    manageLoading(true);
   }
 });
+const displayCategoriesData = (id) => {
+  const url = `https://openapi.programming-hero.com/api/category/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((trees) => displayTreeContainer(trees.plants));
+};
+// plants details
+const plantsData = (id) => {
+  console.log(id);
+  const url = `https://openapi.programming-hero.com/api/plant/${id}`;
+  fetch(url)
+    .then((res) => res.json())
+    .then((tree) => displayPlantsDetails(tree.plants));
+};
+const displayPlantsDetails = (plants) => {
+  console.log(plants);
+  const plantsDetails = document.getElementById("plantsDetails");
+  plantsDetails.innerHTML = "";
+  plantsDetails.innerHTML += `
+                <div class="">
+                    <h1 class="font-bold text-xl">${plants.name}</h1>
+                    <img class="h-50 w-full object-cover mt-4 mb-2" src="${plants.image}" alt="">
+                    <h2><span class="font-bold ">Category:</span> ${plants.category}</h2>
+                    <h2><span class="font-bold my-2">Price: ৳</span>${plants.price}</h2>
+                    <p><span class="font-bold ">Description: </span>${plants.description}</p>
+                </div>
+  `;
+  document.getElementById("plants-modal").showModal();
+};
 /**
  * dispaly main tree
  */
 const displayTreeContainer = (trees) => {
+  console.log(trees);
   treeContainer.innerHTML = "";
   trees.forEach((tree) => {
     treeContainer.innerHTML += `
     <div class="card bg-base-100  shadow-sm p-4">
       <figure>
-      <img class=" w-[300px] h-[150px] object-cover bg-center " src="${
-        tree.image
-      }"
+      <img class=" w-full h-[150px] object-cover bg-center " src="${tree.image}"
       alt="Shoes" />
       </figure>
       <div class=" mt-3">
-        <h2 onclick="my_modal_5.showModal() class="font-bold text-xl">${
-          tree.name
-        }</h2>
+        <h2 onclick="plantsData(${tree.id})" class="font-bold text-xl">${
+      tree.name
+    }</h2>
         <p>${tree.description.slice(0, 100)}...</p>
         <div class="flex justify-between items-center my-3">
           <h2 class="bg-[#CFF0DC] text-[#15803D] px-3 py-2 rounded-full">${
@@ -88,7 +118,9 @@ const displayTreeContainer = (trees) => {
     </div>
 `;
   });
+  manageLoading(false);
 };
+
 /**
  * add to card
  */
@@ -115,6 +147,7 @@ treeContainer.addEventListener("click", (e) => {
     alert(`${title} Added`);
   }
 });
+
 /**
  * display side card
  */
