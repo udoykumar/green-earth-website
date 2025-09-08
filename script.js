@@ -92,14 +92,13 @@ const displayPlantsDetails = (plants) => {
  * dispaly main tree
  */
 const displayTreeContainer = (trees) => {
-  console.log(trees);
   treeContainer.innerHTML = "";
   trees.forEach((tree) => {
     treeContainer.innerHTML += `
-    <div class="bg-white p-4 h-auto">
+    <div class="bg-white p-4 h-fit rounded-md">
       <figure>
       <div class="w-full h-[150px] overflow-hidden rounded-xl">
-        <img class=" w-full h-full duration-400 ease-in-out will-change-transform scale-100 hover:scale-110  duration-100 object-cover bg-center " src="${
+        <img class=" w-full h-full duration-400 ease-in-out will-change-transform scale-100 hover:scale-110  duration-100 object-cover bg-center" src="${
           tree.image
         }"
         alt="Shoes" />
