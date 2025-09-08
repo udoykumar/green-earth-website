@@ -17,10 +17,7 @@ const loadTreeData = () => {
   const url = "https://openapi.programming-hero.com/api/plants";
   fetch(url)
     .then((res) => res.json())
-    .then((alltree) => displayTreeContainer(alltree.plants))
-    .catch((err) => {
-      console.log(err);
-    });
+    .then((alltree) => displayTreeContainer(alltree.plants));
 };
 /**
  * categories data load
@@ -64,14 +61,12 @@ const displayCategoriesData = (id) => {
 };
 // plants details
 const plantsData = (id) => {
-  console.log(id);
   const url = `https://openapi.programming-hero.com/api/plant/${id}`;
   fetch(url)
     .then((res) => res.json())
     .then((tree) => displayPlantsDetails(tree.plants));
 };
 const displayPlantsDetails = (plants) => {
-  console.log(plants);
   const plantsDetails = document.getElementById("plantsDetails");
   plantsDetails.innerHTML = "";
   plantsDetails.innerHTML += `
@@ -95,7 +90,7 @@ const displayTreeContainer = (trees) => {
   treeContainer.innerHTML = "";
   trees.forEach((tree) => {
     treeContainer.innerHTML += `
-    <div class="bg-white p-4 h-fit rounded-md">
+    <div class="bg-white p-4 h-fit rounded-md ">
       <figure>
       <div class="w-full h-[150px] overflow-hidden rounded-xl">
         <img class=" w-full h-full duration-400 ease-in-out will-change-transform scale-100 hover:scale-110  duration-100 object-cover bg-center" src="${
@@ -181,7 +176,6 @@ const displayCard = (card) => {
  * card delete
  */
 const cardItemDelete = (cardId) => {
-  console.log(cardId);
   addToCard.map((item, index) => {
     if (item.id == cardId) {
       addToCard.splice(index, 1);
